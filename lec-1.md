@@ -23,15 +23,20 @@ Words can be represented as one-hot vectors, where we have 1 to represent that w
 
 Problems with one-hot encoding:
 1. Vectors end up having very high dimension.
-2. There is no notion of similarity. Eg: 'motel' and 'hotel' are very similar, but their one-hot encodings are orthogonal. How do we get past this? 
-  * We could build a similarity matrix - but that would have huge size.
-  * We could figure out a way to represent words which could directly give the similarity of that word with another word - 'distributional semantics.'
+2. There is no notion of similarity. Eg: 'motel' and 'hotel' are very similar, but their one-hot encodings are orthogonal. How do we get past this?    
+    i. We could build a similarity matrix - but that would have huge size.
+    ii. We could figure out a way to represent words which could directly give the similarity of that word with another word - 'distributional semantics.'
 
 **Distributional Semantics**
 
 "A word's meaning is given by the words that appear frequently close by."
 
 Idea: We look at different sentences containing a word w, and understand w based on the contexts in which we see it occurring. More specifically, the 'context' of w is the set of words which appear nearby - within a limited window.
+
+Now, the word w is has a 'distributed representation' for which we use a 'dense' vector - this has all non-zero entries.
+
+We have a 'vector space' in which we represent all words. This can be visualized in 2D though the size of the word representation may be 50, 300, 1000, 2000, 4000, etc.
+
 
 
 
