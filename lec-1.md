@@ -37,6 +37,20 @@ Now, the word w is has a 'distributed representation' for which we use a 'dense'
 
 We have a 'vector space' in which we represent all words. This can be visualized in 2D though the size of the word representation may be 50, 300, 1000, 2000, 4000, etc.
 
+Note - The basis vectors aren't fixed, because we could change the basis vectors keeping the dimension the name, and we wpild still be using the same vector space. Later we will come across learning algorithms where we input a bunch of text and get the word representation (with a particular dimension) as the output.
+
+**Word2Vec: Tomas Mikolov**
+
+A simple and scalable way of learning representations of words.
+
+![image](https://user-images.githubusercontent.com/21968647/63219490-cd137300-c127-11e9-8089-48d76d50c103.png)
+
+Graphically understanding the 'centre word' c and the 'outside-context words' o:
+
+![image](https://user-images.githubusercontent.com/21968647/63219503-fcc27b00-c127-11e9-8b9f-3bc61c64b815.png)
+
+
+
 
 
 
