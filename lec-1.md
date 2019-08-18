@@ -11,9 +11,9 @@ On a computer, we can use a thesaurus like say, WordNet, which gives us differen
 ![image](https://user-images.githubusercontent.com/21968647/63219238-4740f900-c122-11e9-9178-cf47034a6d93.png)
 
 Problems with WordNet: 
-(1) Misses nuances - for example, proficient doesn't always mean good
-(2) Requires humans to manually update it to add new words
-(3) Has very fixed synonym sets - so even if two words are partially similar, WordNet will not recognize it, like 'good' and 'marvellous'
+1. Misses nuances - for example, proficient doesn't always mean good
+2. Requires humans to manually update it to add new words
+3. Has very fixed synonym sets - so even if two words are partially similar, WordNet will not recognize it, like 'good' and 'marvellous'
 
 **Representation of Words**
 
@@ -22,11 +22,10 @@ In traditional NLP, words are regarded as discrete symbols - this is a 'localist
 Words can be represented as one-hot vectors, where we have 1 to represent that word, and 0 for every other word in the dictionary. 
 
 Problems with one-hot encoding:
-(1) Vectors end up having very high dimension.
-(2) There is no notion of similarity. Eg: 'motel' and 'hotel' are very similar, but their one-hot encodings are orthogonal.
-How do we get past this? 
-(i) We could build a similarity matrix - but that would have huge size.
-(ii) We could figure out a way to represent words which could directly give the similarity of that word with another word - 'distributional semantics.'
+1. Vectors end up having very high dimension.
+2. There is no notion of similarity. Eg: 'motel' and 'hotel' are very similar, but their one-hot encodings are orthogonal. How do we get past this? 
+  * We could build a similarity matrix - but that would have huge size.
+  * We could figure out a way to represent words which could directly give the similarity of that word with another word - 'distributional semantics.'
 
 **Distributional Semantics**
 
