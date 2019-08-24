@@ -41,14 +41,38 @@ Note - The basis vectors aren't fixed, because we could change the basis vectors
 
 **Word2Vec: Tomas Mikolov**
 
-A simple and scalable way of learning representations of words.
+A simple and scalable way of learning vector representations of words.
 
 ![image](https://user-images.githubusercontent.com/21968647/63219490-cd137300-c127-11e9-8089-48d76d50c103.png)
+
+The vectors are initialized randomly. Then, we go through an iterative process where we go through each position in the text, and look at the surrounding words 
 
 Graphically understanding the 'centre word' c and the 'outside-context words' o:
 
 ![image](https://user-images.githubusercontent.com/21968647/63219503-fcc27b00-c127-11e9-8b9f-3bc61c64b815.png)
 
+Our aim is to maximize the likelihood: for a given centre word c, we want to maximize P ( o | c) for all 'outside' words within a certain window, and repeat this process for every 'centre-word.'
+
+We set the objective function as negative log likelihood. Upon minimizing, we get the optimal value of theta, which represents the best vector representations of the word.
+
+![image](https://user-images.githubusercontent.com/21968647/63641936-9da2c000-c66b-11e9-82f7-1c68863146f0.png)
+
+Our parameter is theta - but instead of theta representing the vector representation of a word, we will use *two* vector representations per word: one, when it is the centre word, and two when it is an outside word.
+
+![image](https://user-images.githubusercontent.com/21968647/63642028-09d1f380-c66d-11e9-9f5b-2747bd29d404.png)
+
+![image](https://user-images.githubusercontent.com/21968647/63642203-d1ccaf80-c670-11e9-9754-a8f5ab92a437.png)
+
+In this way, we calculate P (o | c) as the softmax of the "outside-vector" vector of o and the "centre-vector" vector of c. Note - the denominator is to normalize over the entire volcabulary, and not just the window around c. The words o, which are closer to c in the vector space, have higher dot product, and hence, higher P(o | c).
+Note - The softmax mainly puts mass where the maximum is.
+
+Now we find the value of theta that maximizes the likelihood and minimizes the objective function using gradient descent. In every iteration of gradient descent, we update the vector representations in theta to get higher probabilites P(o | c).
+
+**Gradient Calculation and Interpretation**
+
+![image](https://user-images.githubusercontent.com/21968647/63642749-15c3b280-c679-11e9-93a8-82d602e25a06.png)
+
+Takeaway: We can interpret the calculated gradient as "observed representation of teh context word" - "expected representation of the context word."
 
 
 
