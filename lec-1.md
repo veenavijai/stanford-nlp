@@ -89,7 +89,7 @@ Now we find the value of theta that maximizes the likelihood and minimizes the o
   <img src="https://user-images.githubusercontent.com/21968647/63643031-9be1f800-c67d-11e9-9a55-7bef9e2d3903.png">
 </p>
 
-Takeaway: We can interpret the calculated gradient as "observed representation of teh context word" - "expected representation of the context word."
+Takeaway: We can interpret the calculated gradient as "observed representation of the context word" - "expected representation of the context word."
 
 
 
