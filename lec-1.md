@@ -7,7 +7,9 @@ A common linguistic way of thinking about meaning is denotational semantics. The
 **WordNet**
 
 On a computer, we can use a thesaurus like say, WordNet, which gives us different synonym lists (for different contexts), and also hypernyms (relationships).
-
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63219238-4740f900-c122-11e9-9178-cf47034a6d93.png">
+</p>
 ![image](https://user-images.githubusercontent.com/21968647/63219238-4740f900-c122-11e9-9178-cf47034a6d93.png)
 
 Problems with WordNet: 
