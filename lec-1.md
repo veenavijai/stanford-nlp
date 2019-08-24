@@ -10,7 +10,6 @@ On a computer, we can use a thesaurus like say, WordNet, which gives us differen
 <p align="center">
   <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63219238-4740f900-c122-11e9-9178-cf47034a6d93.png">
 </p>
-![image](https://user-images.githubusercontent.com/21968647/63219238-4740f900-c122-11e9-9178-cf47034a6d93.png)
 
 Problems with WordNet: 
 1. Misses nuances - for example, proficient doesn't always mean good
@@ -45,25 +44,35 @@ Note - The basis vectors aren't fixed, because we could change the basis vectors
 
 A simple and scalable way of learning vector representations of words.
 
-![image](https://user-images.githubusercontent.com/21968647/63219490-cd137300-c127-11e9-8089-48d76d50c103.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63219490-cd137300-c127-11e9-8089-48d76d50c103.png">
+</p>
 
 The vectors are initialized randomly. Then, we go through an iterative process where we go through each position in the text, and look at the surrounding words 
 
 Graphically understanding the 'centre word' c and the 'outside-context words' o:
 
-![image](https://user-images.githubusercontent.com/21968647/63219503-fcc27b00-c127-11e9-8b9f-3bc61c64b815.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63219503-fcc27b00-c127-11e9-8b9f-3bc61c64b815.png">
+</p>
 
 Our aim is to maximize the likelihood: for a given centre word c, we want to maximize P ( o | c) for all 'outside' words within a certain window, and repeat this process for every 'centre-word.'
 
 We set the objective function as negative log likelihood. Upon minimizing, we get the optimal value of theta, which represents the best vector representations of the word.
 
-![image](https://user-images.githubusercontent.com/21968647/63641936-9da2c000-c66b-11e9-82f7-1c68863146f0.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63641936-9da2c000-c66b-11e9-82f7-1c68863146f0.png">
+</p>
 
 Our parameter is theta - but instead of theta representing the vector representation of a word, we will use *two* vector representations per word: one, when it is the centre word, and two when it is an outside word.
 
-![image](https://user-images.githubusercontent.com/21968647/63642028-09d1f380-c66d-11e9-9f5b-2747bd29d404.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63642028-09d1f380-c66d-11e9-9f5b-2747bd29d404.png">
+</p>
 
-![image](https://user-images.githubusercontent.com/21968647/63642203-d1ccaf80-c670-11e9-9754-a8f5ab92a437.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63642203-d1ccaf80-c670-11e9-9754-a8f5ab92a437.png">
+</p>
 
 In this way, we calculate P (o | c) as the softmax of the "outside-vector" vector of o and the "centre-vector" vector of c. Note - the denominator is to normalize over the entire volcabulary, and not just the window around c. The words o, which are closer to c in the vector space, have higher dot product, and hence, higher P(o | c).
 Note - The softmax mainly puts mass where the maximum is.
@@ -72,7 +81,13 @@ Now we find the value of theta that maximizes the likelihood and minimizes the o
 
 **Gradient Calculation and Interpretation**
 
-![image](https://user-images.githubusercontent.com/21968647/63642836-5a9c1900-c67a-11e9-8dba-f2b90c100ab6.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63642994-0cd4e000-c67d-11e9-8915-7949099857c3.png">
+</p>
+
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63643006-3a218e00-c67d-11e9-9f7f-ad87c6295f70.png">
+</p>
 
 Takeaway: We can interpret the calculated gradient as "observed representation of teh context word" - "expected representation of the context word."
 
