@@ -16,25 +16,43 @@ Again, we need to remember that 2D plots can be very misleading, because we can'
 
 **Detour: Optimization**
 
-We have a cost function to minimize. We calculate the gradient of the cost function. We take small steps in the direction of the gradient (move downhill) to reach a minimum. 'Small steps' are achieved through a small learning rate, alpha, which is multiplied with the calculated gradient and then subtracted from the old parameter.
+We have a cost function to minimize. We calculate the gradient of the cost function. We take small steps in the direction of the gradient (move downhill) to reach a minimum. 'Small steps' are achieved through a small learning rate, alpha, which is multiplied with the calculated gradient and then subtracted from the old parameter. Note - our objective function may not alwaus be convex!
 
-
-
-
-
-
-
-On a computer, we can use a thesaurus like say, WordNet, which gives us different synonym lists (for different contexts), and also hypernyms (relationships).
 <p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/63219238-4740f900-c122-11e9-9178-cf47034a6d93.png">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64314668-a5643d80-cf64-11e9-99e5-34c21a6235fc.png)
+">
 </p>
 
+The problem with gradient descent is that if we take, say 1 billion words, and consider 10 context words for each centre word, we will have to calculate 10 billion gradients before we can make a single update, which is extremely slow. This is not done practically.
 
-Problems with one-hot encoding:
-1. Vectors end up having very high dimension.
-2. There is no notion of similarity. Eg: 'motel' and 'hotel' are very similar, but their one-hot encodings are orthogonal. How do we get past this?    
-    i. We could build a similarity matrix - but that would have huge size.
-    ii. We could figure out a way to represent words which could directly give the similarity of that word with another word - 'distributional semantics.'
+Rather, we can use Stochastic Gradient Descent (SGD). We repeatedly sample windows and make an update after each one. It is a noisy estimate of the gradient, but the estimate improves as we take more and more centre words. Normally, we sample a small bunch, or a 'minibatch' of say, 32 or 64 words, and calculate the gradient update from each minibatch. Also, to use parallel programming with GPUs, it is better to use powers of 2 for batch sizes.
 
+If we do use SGD, then only some words occur in its context - not every word vector is updated. This makes the update vector very sparse. We only need to update the word vectors of words which actually appear, so either we need sparse matrix udpate operations to update certain rows of U and V, or we can maintain a hash for word vectors.
 
+**Why do we use 2 vectors in Word2Vec?**
 
+If we have two vectors for each word - for when it is a centre-word and one when it is an outside-word, gradient computation is straightforward. Otherwise, if we use only one word vector - consider a centre-word w. We will have to consider w as well while calculating the softmax of its outside-words, which leads to square terms. Having 2 separate word vectors actually simplifies the math.
+
+**Family of Word2Vec models**
+
+1. Skip-grams (SG)
+    i. One centre-word
+    ii. We try to predict all the context-words, one at a time
+2. Continuous Bag of Words (CBOW)
+    i. We have all the context-words
+    ii. We try to use all of them, by considering them independently like a Naive Bayes model, to predict the centre word.
+    
+**Negative sampling to improve efficiency in training**
+
+Calculating the denominator, which is a sum of dot products computed for *every* word in the vocabulary, is very computationally expensive.
+
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64316195-f70ec700-cf68-11e9-802f-3e65f2cc208f.png)
+">
+</p>
+
+So for a standard Word2Vec, the skip-gram model is implemented with negative sampling.
+
+Idea of negative sampling: Train binary logistic regressions for 
+1. A true pair, which is w & c (a word + one if its context-words) - we try to assign a high probability to c
+2. Several noise pairs, which is w & c' (a word + some of its non-context-words) - randomly sample some non-context words, and assign a low probability to them
