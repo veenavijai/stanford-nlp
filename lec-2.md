@@ -52,5 +52,49 @@ Calculating the denominator, which is a sum of dot products computed for *every*
 So for a standard Word2Vec, the skip-gram model is implemented with negative sampling.
 
 Idea of negative sampling: Train binary logistic regressions for 
-1. A true pair, which is w & c (a word + one if its context-words) - we try to assign a high probability to c
+1. A true pair, which is w & c (a word + one if its context-words) - we try to assign a high probability to c, because it is a word that was actually observed
 2. Several noise pairs, which is w & c' (a word + some of its non-context-words) - randomly sample some non-context words, and assign a low probability to them
+
+<p align="center">
+  <img width="600" height="300" src="https://user-images.githubusercontent.com/21968647/64381767-cb332600-cfe8-11e9-8b58-d5481265d691.png">
+</p>
+
+For the good words (observed context words), we take the dot product with the centre word, put it through a sigmoid function, and we want this probability estimate to be as high as possible.
+
+On the other hand, we also have K randomly chosen words, and we want the sigmoid of their dot product to be as small as possible - so we have an extra minus sign there. We usually take around 10-15 negative samples. 
+
+**Unigram distribution**
+
+To deal with the problem of very frequent words always appearing as context words and subsequently having high probability always assigned to them, we use a 'unigram' distribution to sample words. 
+
+We obtain counts for the occurrence of each word in the corpus - these are 'unigram counts.' These counts are raised to 3/4  (a hyperparameter), and it has the effect of decreasing how often we sample common words and increasing how often we sample rarer words. 
+
+**Co-occurrence Matrix**
+
+Why don't we just count all the words occuring near a given word w, within a particular window, and construct all our probabilities from this co-occurrence matrix?
+
+This co-occurrence matrix will be symmetric and probably sparse, if the window size is small.
+
+Problems with this method:
+    1. We need O(n<sup>2</sup>) storage, which is a lot of storage especially if the vocabulary is large.
+    2. Classification models might have sparsity issues, and hence may not be very robust.
+    
+Solution: We can represent this co-occurrence matrix using a low-dimensional matrix that preserves all the information and is dense. Its dimension would be 25-1000, similar to Word2Vec.
+
+**Dimensionality Reduction**
+
+   
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
