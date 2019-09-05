@@ -6,7 +6,7 @@ Note - take PCA 2D representations with a pinch of salt, because a lot of inform
 
 **Review of Word2Vec**
 
-We have a matrix for U and V, which are the matrices of vectors for when the word is an 'outside-word' and 'centre-word' respectively. Note - in most major deep learning packages like TensorFlow and PyTorch, a vector is represented as a row, not as a column. The dot product we take is U.vT which is n x 1 if we have n words. The softmax vector is also n x 1 which gives us the probabilities.
+We have a matrix for U and V, which are the matrices of vectors for when the word is an 'outside-word' and 'centre-word' respectively. Note - in most major deep learning packages like TensorFlow and PyTorch, a vector is represented as a row, not as a column. The dot product we take is U.v<sup>T</sup> which is n x 1 if we have n words. The softmax vector is also n x 1 which gives us the probabilities.
 
 The aim of Word2Vec is to have a model that outputs reasonably high probabilities for all words occurring in the context of a given 'centre-word.'
 
@@ -35,11 +35,11 @@ If we have two vectors for each word - for when it is a centre-word and one when
 **Family of Word2Vec models**
 
 1. Skip-grams (SG)
-    i. One centre-word
-    ii. We try to predict all the context-words, one at a time
+  i. One centre-word
+  ii. We try to predict all the context-words, one at a time
 2. Continuous Bag of Words (CBOW)
-    i. We have all the context-words
-    ii. We try to use all of them, by considering them independently like a Naive Bayes model, to predict the centre word
+  i. We have all the context-words
+  ii. We try to use all of them, by considering them independently like a Naive Bayes model, to predict the centre word
     
 **Negative sampling to improve efficiency in training**
 
@@ -83,7 +83,7 @@ Solution: We can represent this co-occurrence matrix using a low-dimensional mat
 
 **Dimensionality Reduction**
 
-We factorize the matrix X into USVT and then throw away the smaller singular vectors to get the 'reduced SVD.' Now we have low-dimension SVD word vectors, which we can plot, like before. Note - When we use k singular values, that approximation is actually the *best* k-rank approximation of the matrix in a least-squares error sense. 
+We factorize the matrix X into USV<sup>T</sup> and then throw away the smaller singular vectors to get the 'reduced SVD.' Now we have low-dimension SVD word vectors, which we can plot, like before. Note - When we use k singular values, that approximation is actually the *best* k-rank approximation of the matrix in a least-squares error sense. 
 
 This technique was used in applications like 'Latent Semantic Analysis' and 'Latent Semantic Indexing' and the idea was that we would have semantic directions with some meaning, that we were finding in low-dimensional spaces.
 
@@ -103,16 +103,16 @@ Takeaway: if we carefully design the counts, even conventional methods can give 
 **Two schools: count-based vs direct prediction**
 
 <p align="center">
-  <img width="600" height="300" src="https://user-images.githubusercontent.com/21968647/64387311-6ed40480-cff0-11e9-9f45-10f1c08e6116.png">
+  <img width="600" height="300" src="https://user-images.githubusercontent.com/21968647/64389702-9333df00-cff8-11e9-8bd1-dabe11f49287.png">
 </p>
     
 **GloVe model of word vectors**    
     
 In 2014, Pennington combined the benefits of these 2 methods - "we can use ratios of co-occurrence probabilities to encode meaning components." If we can find a space where ratios are linear, we are satisfied.
 
-We can create a log model where w<sub>i</sub> . w<sub>j</sub> = log P(i|j).
+We can create a log model where w<sub>i</sub> . w<sub>j</sub> = log P(i | j).
 
-Then, vector differences immediately give rise to a ratio: w<sub>x</sub> . (w<sub>a</sub> - w<sub>b</sub>) = log P(x|a)/P(x|b)
+Then, vector differences immediately give rise to a ratio: w<sub>x</sub> . (w<sub>a</sub> - w<sub>b</sub>) = log P(x | a)/P(x | b)
 
 We come up with an objective function that has a squared loss term, where we want the dot product to be as close to the log of the co-occurrence probability as possible, and we add a bias term for each word too, to take care of if each of the words is commonly occurring.
 
