@@ -2,7 +2,7 @@
 
 In addition to the vector space being a 'similarity space,' where words which are close together have similar meanings, we may also be able to associate different directions with different meanings. The most famous example of this is the analogy "Man:king :: Woman:queen." It seems to understand notions of similarity (Australia-Australian), of belonging (France-champagne), syntax (long-longest), of the notion of making something extreme (bad-terrible), and more.
 
-Note - take PCA 2-D representations with a pinch of salt, because a lot of information is lost while bringing it down to 2 dimensions.
+Note - take PCA 2D representations with a pinch of salt, because a lot of information is lost while bringing it down to 2 dimensions.
 
 **Review of Word2Vec**
 
@@ -19,7 +19,7 @@ Again, we need to remember that 2D plots can be very misleading, because we can'
 We have a cost function to minimize. We calculate the gradient of the cost function. We take small steps in the direction of the gradient (move downhill) to reach a minimum. 'Small steps' are achieved through a small learning rate, alpha, which is multiplied with the calculated gradient and then subtracted from the old parameter. Note - our objective function may not always be convex!
 
 <p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64314668-a5643d80-cf64-11e9-99e5-34c21a6235fc.png">
+  <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/64314668-a5643d80-cf64-11e9-99e5-34c21a6235fc.png">
 </p>
 
 The problem with gradient descent is that if we take, say 1 billion words, and consider 10 context words for each centre word, we will have to calculate 10 billion gradients before we can make a single update, which is extremely slow. This is not done practically.
