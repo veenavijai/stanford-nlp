@@ -96,22 +96,59 @@ This technique was used in applications like 'Latent Semantic Analysis' and 'Lat
 
 **Semantic patterns in vector space**
 
-If we can construct a vector space with a linear property, i.e., clearly associate a direction to a relationship (for example, action-doer like clean-janitor, swim-swimmer, pray-priest), then these word vectors will do well when it comes to analogies.
+If we can construct a vector space with a linearity property, i.e., clearly associate a direction to a relationship (for example, action-doer like clean-janitor, swim-swimmer, pray-priest), then this space will do well when it comes to analogies.
 
 Takeaway: if we carefully design the counts, even conventional methods can give us useful word vector spaces.
 
+**Two schools: count-based vs direct prediction**
 
-**Count-based vs direct prediction**
-
-
+<p align="center">
+  <img width="600" height="300" src="https://user-images.githubusercontent.com/21968647/64387311-6ed40480-cff0-11e9-9f45-10f1c08e6116.png">
+</p>
     
-
+**GloVe model of word vectors**    
     
+In 2014, Pennington combined the benefits of these 2 methods - "we can use ratios of co-occurrence probabilities to encode meaning components." If we can find a space where ratios are linear, we are satisfied.
 
+We can create a log model where w<sub>i</sub> . w<sub>j</sub> = log P(i|j).
 
+Then, vector differences immediately give rise to a ratio: w<sub>x</sub> . (w<sub>a</sub> - w<sub>b</sub>) = log P(x|a)/P(x|b)
 
+We come up with an objective function that has a squared loss term, where we want the dot product to be as close to the log of the co-occurrence probability as possible, and we add a bias term for each word too, to take care of if each of the words is commonly occurring.
 
+We also use an f function, which acts as a ceiling, to cap the effect that very common word pairs have on the performance of the system.
 
+**Evaluation of word vectors**
 
+1. Intrinsic: We evaluate on a specific subtask (for example, is it putting synonyms close together?) and this is fast to compute, but we aren't sure if these word vectors are actually useful
+2. Extrinsic: We evaluate the word vectors on a real task, with applications that we care about (for example, web search, question-answering, phone dialogue system). Does it make performance go up? It can take a long time to compute accuracy. Also, the results are hard to interpret in that, low performance could be related to how the system was built and not your model.
 
+**Intrinsic word vector evaluations**
 
+Usually, to work out analogies, people calculate the cosine distance (angle between different word candidates).
+
+We have a Word Vector Analogies dataset, which tests semantic (countries, capitals, states, currencies) and syntactic relationships (bad-worst).
+
+Plain SVD on counts does not work well for analogies! But manioulations of the count matrix first, followed by SVD, performs well.
+
+**Analogy evaluation and hyperparameters**
+
+After dimension 300, the performance plateaus, which is why 300 is a commonly chosen dimension for word vectors. Also, symmetric context works better than asymmetic context.
+
+Zi and Yuanyuan, NeurIPS 2018 - One would think that for very high-dimensional word-embeddings, like say, 10,000, things would begin to "fall apart" because we have way more parameters than training data. However, they showed that performance remained flat even for very high dimensions.
+
+More training time helps.
+
+More data helps. Also, Wikipedia shows better results with less data compared to news articles. 
+
+To evaluate correlation, we can also average human judgements to come up with a correlation score for every pair of words, which is between 1 and 10 (with 10 being the highest correlation).
+
+**Word senses and word sense ambiguity**
+
+Most words have multiple meanings, especially common words and words which have existed for a long time.
+
+Huang et al. 2012 - trying to come up with a model which has multiple senses for a word. Cluster all the contexts in which that word occurs, and see if there are multiple distinct clusters. For example, if we have 5 clusters for the word 'jaguar,' we call them 'jaguar1,' 'jaguar2,' and so on. However, this is crude because usually, senses are related - different senses emerge when people 'stretch' the existing meaning.
+
+Sanjeev Arora, 2018 - the word vector for a word with multiple senses is a weighted average (superposition) of the word vectors for each of those senses. The weights are the relative frequency of occurrence. With some ideas from sparse coding, we can now actually separate out the senses, assuming they are fairly common.
+
+It was observed that word vectors have been useful in extrinsic tasks as well (named entity recognition).
