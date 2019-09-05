@@ -94,8 +94,14 @@ This technique was used in applications like 'Latent Semantic Analysis' and 'Lat
 3. Sample context-words closer to the centre-words, more - 'ramped windows'
 4. Use Pearson correlations instead of counts and discard negative values
 
+**Semantic patterns in vector space**
+
+If we can construct a vector space with a linear property, i.e., clearly associate a direction to a relationship (for example, action-doer like clean-janitor, swim-swimmer, pray-priest), then these word vectors will do well when it comes to analogies.
+
+Takeaway: if we carefully design the counts, even conventional methods can give us useful word vector spaces.
 
 
+**Count-based vs direct prediction**
 
 
     
