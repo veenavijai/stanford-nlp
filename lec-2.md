@@ -46,7 +46,7 @@ If we have two vectors for each word - for when it is a centre-word and one when
 Calculating the denominator, which is a sum of dot products computed for *every* word in the vocabulary, is very computationally expensive.
 
 <p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64316195-f70ec700-cf68-11e9-802f-3e65f2cc208f.png">
+  <img width="700" height="200" src="https://user-images.githubusercontent.com/21968647/64316195-f70ec700-cf68-11e9-802f-3e65f2cc208f.png">
 </p>
 
 So for a standard Word2Vec, the skip-gram model is implemented with negative sampling.
