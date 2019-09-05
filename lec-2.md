@@ -16,11 +16,10 @@ Again, we need to remember that 2D plots can be very misleading, because we can'
 
 **Detour: Optimization**
 
-We have a cost function to minimize. We calculate the gradient of the cost function. We take small steps in the direction of the gradient (move downhill) to reach a minimum. 'Small steps' are achieved through a small learning rate, alpha, which is multiplied with the calculated gradient and then subtracted from the old parameter. Note - our objective function may not alwaus be convex!
+We have a cost function to minimize. We calculate the gradient of the cost function. We take small steps in the direction of the gradient (move downhill) to reach a minimum. 'Small steps' are achieved through a small learning rate, alpha, which is multiplied with the calculated gradient and then subtracted from the old parameter. Note - our objective function may not always be convex!
 
 <p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64314668-a5643d80-cf64-11e9-99e5-34c21a6235fc.png)
-">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64314668-a5643d80-cf64-11e9-99e5-34c21a6235fc.png">
 </p>
 
 The problem with gradient descent is that if we take, say 1 billion words, and consider 10 context words for each centre word, we will have to calculate 10 billion gradients before we can make a single update, which is extremely slow. This is not done practically.
@@ -31,7 +30,7 @@ If we do use SGD, then only some words occur in its context - not every word vec
 
 **Why do we use 2 vectors in Word2Vec?**
 
-If we have two vectors for each word - for when it is a centre-word and one when it is an outside-word, gradient computation is straightforward. Otherwise, if we use only one word vector - consider a centre-word w. We will have to consider w as well while calculating the softmax of its outside-words, which leads to square terms. Having 2 separate word vectors actually simplifies the math.
+If we have two vectors for each word - for when it is a centre-word and one when it is an outside-word, gradient computation is straightforward. Otherwise, if we use only one word vector - consider a centre-word w. We will have to consider w itself while calculating the softmax of its outside-words, which leads to square terms. Having 2 separate word vectors actually simplifies the math.
 
 **Family of Word2Vec models**
 
@@ -40,15 +39,14 @@ If we have two vectors for each word - for when it is a centre-word and one when
     ii. We try to predict all the context-words, one at a time
 2. Continuous Bag of Words (CBOW)
     i. We have all the context-words
-    ii. We try to use all of them, by considering them independently like a Naive Bayes model, to predict the centre word.
+    ii. We try to use all of them, by considering them independently like a Naive Bayes model, to predict the centre word
     
 **Negative sampling to improve efficiency in training**
 
 Calculating the denominator, which is a sum of dot products computed for *every* word in the vocabulary, is very computationally expensive.
 
 <p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64316195-f70ec700-cf68-11e9-802f-3e65f2cc208f.png)
-">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21968647/64316195-f70ec700-cf68-11e9-802f-3e65f2cc208f.png">
 </p>
 
 So for a standard Word2Vec, the skip-gram model is implemented with negative sampling.
