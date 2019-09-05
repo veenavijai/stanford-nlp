@@ -76,14 +76,25 @@ Why don't we just count all the words occuring near a given word w, within a par
 This co-occurrence matrix will be symmetric and probably sparse, if the window size is small.
 
 Problems with this method:
-    1. We need O(n<sup>2</sup>) storage, which is a lot of storage especially if the vocabulary is large.
-    2. Classification models might have sparsity issues, and hence may not be very robust.
+1. We need O(n<sup>2</sup>) storage, which is a lot of storage especially if the vocabulary is large.
+2. Classification models might have sparsity issues, and hence may not be very robust.
     
 Solution: We can represent this co-occurrence matrix using a low-dimensional matrix that preserves all the information and is dense. Its dimension would be 25-1000, similar to Word2Vec.
 
 **Dimensionality Reduction**
 
-   
+We factorize the matrix X into USVT and then throw away the smaller singular vectors to get the 'reduced SVD.' Now we have low-dimension SVD word vectors, which we can plot, like before. Note - When we use k singular values, that approximation is actually the *best* k-rank approximation of the matrix in a least-squares error sense. 
+
+This technique was used in applications like 'Latent Semantic Analysis' and 'Latent Semantic Indexing' and the idea was that we would have semantic directions with some meaning, that we were finding in low-dimensional spaces.
+
+**Other work-arounds for frequently occurring words**
+
+1. Scale the counts using, say, log - commonly used in information retrieval
+2. Use a ceiling function - min (X, t) with t = 100, and then ignore counts with 100
+3. Sample context-words closer to the centre-words, more - 'ramped windows'
+4. Use Pearson correlations instead of counts and discard negative values
+
+
 
 
 
