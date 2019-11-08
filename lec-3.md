@@ -25,7 +25,7 @@ For each example (x, y), we want to maximize P(y | x) for the correct y. This is
 However, we more commonly use 'cross-entropy loss,' which is a measure of how good our estimated probability distribution is and is more convenient to use than NLL. Cross-entropy is defined as:
 
 <p align="center">
-  <img width="750" height="150" src="https://user-images.githubusercontent.com/21968647/64905190-4c458980-d689-11e9-8f9a-04485f6e8816.png">
+  <img width="500" height="150" src="https://user-images.githubusercontent.com/21968647/68459919-7617ba00-01bb-11ea-9379-6d96028b7a00.png">
 </p>
 
 p is the true probability distribution, and q is the probability distribution as given by softmax. While training, we usually consider the objective function to be the mean of the cross-entropy loss.
