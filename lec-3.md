@@ -60,6 +60,23 @@ We calculate the 'activation' from the output of a layer, and we do this element
 
 **Named Entity Recognition (NER)**
 
+Task: find and classify names in text (for example,names, organizations, and locations)
+
+Very important in question-answering because answers are usually named entities.
+
+To build  a knowledge base from text, we usually extract named entities and find relations between them.
+
+**NER on Word Sequences**
+
+We predict entitites (PERSON, ORGANIZATION) by classifying words in context of their neighbouring words. Entities are often phrases.
+
+**Why NER Might be Hard**
+
+1. It can be hard to figure out the exact boundaries of an entity
+2. Is something an entity in the first place?
+3. What class is the unknown entity?
+4. Entity class may be different in different contextx (for example, PERSON and ORGANIZATION)
+
 
 
 
