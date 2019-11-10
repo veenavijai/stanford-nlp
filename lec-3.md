@@ -77,6 +77,15 @@ We predict entitites (PERSON, ORGANIZATION) by classifying words in context of t
 3. What class is the unknown entity?
 4. Entity class may be different in different contextx (for example, PERSON and ORGANIZATION)
 
+We want a build a classifier to classify a word within a context - we rarely classify single words. Ambiguity is quite common. Words can be auto-antonyms (sede, sanction) - they can mean themselves and the opposite.
+
+**Window Classification**
+
+For a given word, we could average its context vectors and classify that vector - but we are losing position information.
+
+We can work around this problem by concatenating all the word vectors in the window, and train a softmax classifier to classify the centre word.
+
+
 
 
 
