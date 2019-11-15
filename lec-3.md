@@ -77,7 +77,7 @@ We predict entitites (PERSON, ORGANIZATION) by classifying words in context of t
 3. What class is the unknown entity?
 4. Entity class may be different in different contextx (for example, PERSON and ORGANIZATION)
 
-We want a build a classifier to classify a word within a context - we rarely classify single words. Ambiguity is quite common. Words can be auto-antonyms (sede, sanction) - they can mean themselves and the opposite.
+We want a build a classifier to classify a word within a context - we rarely classify single words. Ambiguity is quite common. Words can be auto-antonyms (seed, sanction) - they can mean themselves and the opposite.
 
 **Window Classification**
 
@@ -87,7 +87,7 @@ We can work around this problem by concatenating all the word vectors in the win
 
 **Binary Classification for NER Location**
 
-Collobert & Weston (2008): Classify between windows which have a location entity in the middle vs not. Exaple: "museums in Paris are amazing" vs "
+Collobert & Weston (2008): Classify between windows which have a location entity in the middle vs not. Exaple: "museums in Paris are amazing" vs "not all museums in Paris."
 
 Procedure:
 1. Calculate the word vectors for each word in the window.
@@ -103,7 +103,7 @@ Our aim is to find how the score s changes wrt all the parameters, W, b, and u. 
 The derivative of the score with respect to the bias term: 
 
 <p align="center">
-  <img width="400" height="350" src="https://user-images.githubusercontent.com/21968647/68907447-a819a680-06fc-11ea-849b-d9d592c35140.png">
+  <img width="500" height="350" src="https://user-images.githubusercontent.com/21968647/68907447-a819a680-06fc-11ea-849b-d9d592c35140.png">
 </p>
 
 We can efficiently compute other gradients by reusing common terms from other gradients, namely, (ds/dh * dh/dz).
