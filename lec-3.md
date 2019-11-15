@@ -85,14 +85,33 @@ For a given word, we could average its context vectors and classify that vector 
 
 We can work around this problem by concatenating all the word vectors in the window, and train a softmax classifier to classify the centre word.
 
+**Binary Classification for NER Location**
 
+Collobert & Weston (2008): Classify between windows which have a location entity in the middle vs not. Exaple: "museums in Paris are amazing" vs "
 
+Procedure:
+1. Calculate the word vectors for each word in the window.
+2. Concatenate them to get x.
+3. x multiplied with weights W (and optional bias b added) is the intermediate hidden layer, h.
+4. Then, a score s is assigned to each window where s = <u, h>. 
+5. Therefore, our input is this window, and we get our output as the score.
 
+**Getting into the Derivatives**
 
+Our aim is to find how the score s changes wrt all the parameters, W, b, and u. We can do this with the chain rule after simplifying (for instance, z = Wx + b).
 
+The derivative of the score with respect to the bias term: 
 
+<p align="center">
+  <img width="400" height="350" src="https://user-images.githubusercontent.com/21968647/68907447-a819a680-06fc-11ea-849b-d9d592c35140.png">
+</p>
 
+We can efficiently compute other gradients by reusing common terms from other gradients, namely, (ds/dh * dh/dz).
 
+**Conventions for Derivatives**
 
+In this course, the gradient wrt some parameter has the same shape as the parameter.
 
+**Backpropagation**
 
+Deep learning frameworks like TensorFlow, PyTorch, etc, compute gradients described above with efficient algorithms.
