@@ -1,10 +1,10 @@
- Lecture 4: Backpropagation
+ # Lecture 4: Backpropagation
 
 **Recap**
 
 Storing a 'local' error, i.e., the common terms in the backpropagation, is useful to reduce computation. We basically reuse derivatives from higher layers to computer derivatives of lower layers.
 
-'When we differentiate wrt one element of the matrix W(i, j), we get x(j). 
+When we differentiate wrt one element of the matrix W(i, j), we get x(j). 
 
 **Tips to Derive Gradients**
 
@@ -20,7 +20,7 @@ In each update, we update one word in the window - hence the updates are sparse 
 
 In principle, we hope that such gradient updates make the word vector more helpful in determining named entities.
 
-Pitfall: Very similar words may not be moved around the same way while retraining
+Pitfall: Very similar words may not be moved around the same way while retraining. For example, TV and telly may be moved similarly, but television may not be.
 
 **Practically, should I use pre-trained word vectors?**
 
