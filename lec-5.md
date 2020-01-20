@@ -39,13 +39,54 @@ Another example of the above is the headline on Trump's first physical exam, "Do
 
 There are other types as well, such as Adjectival Modifier Ambiguity and Verb Phrase Attachment Ambiguity.
 
-**Dependency Structures**
+**Dependency Structures as Graphs**
 
-We draw binary and asymmetric relationships, i.e., arrows, between 'lexical items' and represent it as a tree graph:
+We draw binary and asymmetric relationships, i.e., arrows, between 'lexical items' and represent it as a tree graph, where each arrow shows the relationship between parent (head of dependency) and child (dependent):
 
 <p align="center">
   <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/71703802-8bf4c600-2d8b-11ea-8baf-4f3a5dad970f.png">
 </p>
 
+Panini, a famous linguist, was creating dependency structures for Sanskrit as early as 5 BC!
+
+### Treebanks and their Advantages
+
+Universal Dependencies is a database with manually annotated 'treebanks.'
+
+Writing grammars instead of dependencies seems more efficient because they can probably generalize well and take less time. However, treebanks are quite useful because they are reuse-able to build parsers, whereas grammars vary a lot depending on who came up with the definition. Another huge advantage is that treebanks can help find the correct structure for the sentence in context, which grammars cannot do - this helps a lot when it comes to ambiguity.
+
+### Constraints with Dependency Structures
+
+1. We want our graph to be a tree, so no cycles are allowed.
+2. Often we have a 'fake' node called ROOT, which links to the very first dependency head - there should be only one such word which is connected to ROOT.
+
+### Arc-standard Transition-based Parser
+
+We have a stack (words we;ve seen) and a buffer (words which are unseen). At every stage, we can take a word from the buffer, and shift it onto the stack, or we can look at the existing stack and either create a 'left arc' or a 'right arc' to represent a dependency relationship.
+
+However, we have many choices at each stage - how do we know the correct way to make choices? If we looked at all choices, we would have to consider an exponential number of possible trees. Instead, people in the 1960s used dynamic programming to efficiently go through the search space. They were still cubic in their order, or worse.
+
+Later in the 2000s, Joakim Nivre came up with the idea to use machine learning - each of the 3 possible actions (shift, left arc, right arc) is predicted by a discriminative classifier, which does quite well. It provides linear time parsing, which was a huge breakthrough.
 
 
+### Conventional Feature Representation
+
+In order to build the classifier, we had very complex hand-engineered features (which were binary indicator features).
+
+Note: we can generate a parse and count the number of correct dependencies in order to evaluate a parser.
+
+There are problems with complex hand-engineered features:
+
+<p align="center">
+  <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/72720622-395b2e00-3b2f-11ea-9d4b-313ca0bc0ee9.png">
+</p>
+
+To avoid the problems that arise with conventional parsers, we could build a neural network to predict an action given a particular stack+buffer configuration - this is neural dependency parsing. Chen & Manning achieved SOTA with even faster speeds in 2014.
+
+The idea was to use the input features as distributed representations (exactly like word vectors) and have the network predict the action (similar to the actions in Nivre's model).
+
+<p align="center">
+  <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/72721172-49bfd880-3b30-11ea-89c9-062ba66d8ba5.png">
+</p>
+
+The latest work is similar to this, using deeper, more finely tuned networks, along with beam search (done by Google).
