@@ -43,7 +43,7 @@ We can find the conditional probabilities for the next word and rank them in des
 We concatenate the word embeddings of the previous (n - 1) words and pass it through some hidden layers and finally to a softmax layer, which outputs the probability of each word.
 
 <p align="center">
-  <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/72769716-76b3d000-3bb0-11ea-9233-d1e82d6f2c4d.png">
+  <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/72770389-96e48e80-3bb2-11ea-844c-c6c7d33ed052.png">
 </p>
 
 We have a few improvements over n-gram but also disadvantage. The biggest disadvantage is that the weight matrix, W, has no weights which are shared across embeddings - they should have some commonalities but we aren't making use of them, and we are probably causing redundancies.
