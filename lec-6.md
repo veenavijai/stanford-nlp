@@ -68,7 +68,9 @@ Our hidden states are calculated as follows:
 
 The embeddings used can be initialized and trained from scratch, or pre-trained embeddings which are 'frozen' and left unchanged, or fine-tuned pre-trained embeddings.
 
-
+<p align="center">
+  <img width="300" height="550" src="https://user-images.githubusercontent.com/21968647/72771469-d496e680-3bb5-11ea-90d2-84e60609df3f.png">
+</p>
 
 
 
