@@ -63,7 +63,7 @@ Each hidden state is calcuated using the previous hidden state and the current i
 Our hidden states are calculated as follows:
 
 <p align="center">
-  <img width="350" height="150" src="https://user-images.githubusercontent.com/21968647/72770789-c0ea8080-3bb3-11ea-841f-805d18035f28.png">
+  <img width="150" height="80" src="https://user-images.githubusercontent.com/21968647/72770789-c0ea8080-3bb3-11ea-841f-805d18035f28.png">
 </p>
 
 The embeddings used can be initialized and trained from scratch, or pre-trained embeddings which are 'frozen' and left unchanged, or fine-tuned pre-trained embeddings.
