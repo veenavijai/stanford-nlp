@@ -54,7 +54,7 @@ We have a few improvements over n-gram but also disadvantage. The biggest disadv
 
 **Recurrent Neural Network (RNN) Architecture**
 
-Each hidden state is calcuated using the previous hidden state and the current input. The core idea in an RNN is that the weights are shared in every stage. 
+Each hidden state is calcuated using the previous hidden state and the current input. The core idea in an RNN is that the weights are shared in every stage. Since we don't apply different weights at each step, we are able to handle variable-length input.
 
 <p align="center">
   <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/72770722-8e408800-3bb3-11ea-882f-704bf55b9837.png">
