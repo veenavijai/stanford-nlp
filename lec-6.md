@@ -77,7 +77,7 @@ The embeddings used can be initialized and trained from scratch, or pre-trained 
 At every time step, we predict the probability distribution of every word (to be the next word), and we compute loss as cross-entropy between our predicted distribution and the actual next word in the corpus (which will be a one-hot vector).
 
 <p align="center">
-  <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/73156703-76757200-4093-11ea-92bd-a3c347f7347a.png">
+  <img width="400" height="250" src="https://user-images.githubusercontent.com/21968647/73156703-76757200-4093-11ea-92bd-a3c347f7347a.png">
 </p>
 
 However, updating gradients after an entire pass across the corpus takes time. So, in practice, we usually use Stochastic Gradient Descent. Remember: SGD on average gives the same descent direction as GD, and also it is a good idea to shuffle data.
@@ -101,7 +101,7 @@ Be skeptical while looking at generated text online, as they are usually cherry-
 A standard metric is perplexity, which is actually the e<sup>cross-entropy loss</sup>. This is convenient because reducing cross-entropy loss will also reduce the perplexity. We want the lowest possible perplexity.
 
 <p align="center">
-  <img width="450" height="100" src="https://user-images.githubusercontent.com/21968647/73157474-ed136f00-4095-11ea-8667-a86c88ee58b9.png">
+  <img width="450" height="250" src="https://user-images.githubusercontent.com/21968647/73157474-ed136f00-4095-11ea-8667-a86c88ee58b9.png">
 </p>
 
 The 1/T in the exponent is to ensure that the perplexity doesn't get larger just because of the size of the corpus.
