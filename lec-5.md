@@ -88,8 +88,4 @@ The idea was to use the input features as distributed representations (exactly l
   <img width="550" height="350" src="https://user-images.githubusercontent.com/21968647/72721172-49bfd880-3b30-11ea-89c9-062ba66d8ba5.png">
 </p>
 
-<p align="center">
-  <img width="400" height="400" src="https://user-images.githubusercontent.com/21968647/75006094-6d26bd80-5425-11ea-8430-0c91770c670a.png">
-</p>
-
 The latest work is similar to this, using deeper, more finely tuned networks, along with beam search (done by Google).
